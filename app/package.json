@@ -1,0 +1,47 @@
+{
+  "name": "sonarqube",
+  "version": "1.0.1",
+  "description": "Sonarqube setup with node app",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:VikashChoudahry/sonarqube-setup.git"
+  },
+  "scripts": {
+    "test": "mocha --timeout 30000 ./test/**/*.js --exit",
+    "coverage": "./node_modules/.bin/nyc -r cobertura -r text-summary -r html npm test",
+    "coverage-lcov": "./node_modules/.bin/nyc -r cobertura -r text-summary -r lcov npm test",
+    "start": "nodemon server.js",
+    "build": "webpack -p",
+    "lint": "./node_modules/.bin/eslint ."
+  },
+  "author": "Vikash",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "js-yaml": "^3.13.1"
+  },
+  "devDependencies": {
+    "chai": "4.1.2",
+    "dotenv": "5.0.1",
+    "eslint": "7.11.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "mocha": "8.2.0",
+    "nock": "13.0.4",
+    "nyc": "15.1.0",
+    "supertest": "3.0.0"
+  },
+  "jest": {
+        "testEnvironment":  "node",
+        "coveragePathIgnorePatterns": [
+            "/node_modules/"
+        ],
+        "testResultsProcessor":  "jest-sonar-reporter"
+    },
+    "jestSonar": {
+        "reportPath":  "coverage",
+        "reportFile":  "test-reporter.xml",
+        "indent":  4
+    }
+}
